@@ -1,0 +1,8 @@
+{
+  "name": "pipecraft-example-library",
+  "version": "0.1.0",
+  "description": "Single-branch library example: publish from main, no promotion flow",
+  "type": "module",
+  "scripts": { "test": "node test/index.test.js", "build": "node -e \"console.log('built')\"" },
+  "license": "MIT"
+}

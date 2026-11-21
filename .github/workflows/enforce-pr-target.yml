@@ -1,0 +1,38 @@
+#=============================================================================
+# PIPECRAFT MANAGED WORKFLOW
+#=============================================================================
+#
+# 🔒 THIS ENTIRE FILE IS GENERATED. Edits are overwritten on the next
+#    'pipecraft generate'. Unlike pipeline.yml, nothing here is preserved.
+#
+# ⚙️  Generated from your .pipecraftrc:
+#   - initialBranch
+#   - finalBranch
+#
+# ✏️  To change this workflow, change the config above and regenerate. To add
+#    checks of your own, put them in a separate workflow file.
+#=============================================================================
+name: Enforce PR Target Branch
+
+# pull_request_target for the same reason as the multi-branch form below: a pull_request run
+# from a first-time contributor waits for approval, and this workflow exists to report the
+# 'check-pr-target' status a branch protection rule may require. Gated behind approval, that
+# status never arrives and the contributor's PR can never merge. This job checks out nothing
+# and 'permissions: {}' leaves it no token.
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened]
+    # Single-branch flow: 'main' is the only branch, so it is the only valid target.
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  check-pr-target:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm correct target
+        run: |
+          echo "✅ PR correctly targets 'main' branch"
+          echo "Single-branch flow: 'main' is the only branch in the flow."
